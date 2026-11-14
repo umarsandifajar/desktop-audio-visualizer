@@ -1,0 +1,85 @@
+{
+  "name": "desktop-audio-visualizer",
+  "productName": "Desktop Audio Visualizer",
+  "version": "1.1.0",
+  "description": "Real-time audio visualizer overlay for the Windows desktop. Reacts to all system audio via WASAPI loopback.",
+  "main": "src/main.js",
+  "author": "Fajar Umarsandi",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win nsis portable",
+    "dist:installer": "electron-builder --win nsis",
+    "dist:portable": "electron-builder --win portable"
+  },
+  "dependencies": {
+    "butterchurn": "^2.6.7",
+    "butterchurn-presets": "^2.4.7",
+    "koffi": "^2.9.0"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.desktopvisualizer.app",
+    "productName": "Desktop Audio Visualizer",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "build/icon.png",
+      "package.json"
+    ],
+    "asarUnpack": [
+      "node_modules/koffi/**"
+    ],
+    "win": {
+      "icon": "build/icon.png",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "artifactName": "DesktopAudioVisualizer-Setup-${version}.exe"
+    },
+    "portable": {
+      "artifactName": "DesktopAudioVisualizer-Portable-${version}.exe"
+    }
+  },
+  "homepage": "https://github.com/umarsandifajar/desktop-audio-visualizer#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/umarsandifajar/desktop-audio-visualizer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/umarsandifajar/desktop-audio-visualizer/issues"
+  },
+  "keywords": [
+    "audio-visualizer",
+    "visualizer",
+    "electron",
+    "windows",
+    "overlay",
+    "wasapi",
+    "milkdrop",
+    "butterchurn",
+    "music",
+    "desktop"
+  ]
+}

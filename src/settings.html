@@ -1,0 +1,67 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Desktop Audio Visualizer</title>
+<style>
+  :root { --bg:#0e0f14; --panel:#161821; --line:#262a38; --text:#e8e9f0; --mute:#8b90a5; --a:#7c5cff; --b:#00e0ff; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:13px/1.4 'Segoe UI Variable','Segoe UI',system-ui,sans-serif; }
+  header { display:flex; justify-content:space-between; gap:12px; padding:18px 20px 12px; border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--bg); z-index:2; }
+  header h1 { margin:0 0 2px; font-size:17px; font-weight:600; }
+  header p { margin:0; color:var(--mute); font-size:12px; }
+  .coffee { align-self:flex-start; display:inline-flex; align-items:center; gap:7px; padding:7px 13px; border-radius:999px; background:#ffdd00; color:#1b1b1b; font-weight:600; font-size:12.5px; text-decoration:none; white-space:nowrap; }
+  .coffee:hover { background:#ffe84d; }
+  main { padding:6px 20px 8px; }
+  section { padding:14px 0 6px; border-bottom:1px solid var(--line); }
+  section h2 { margin:0 0 8px; font-size:13px; font-weight:600; color:var(--b); }
+  .row { display:grid; grid-template-columns: 1fr 235px; gap:12px; align-items:center; padding:5px 0; }
+  .row > span { color:#c9cce0; }
+  .ctl { display:flex; gap:8px; align-items:center; }
+  .tg { display:inline-flex; align-items:center; gap:4px; color:var(--mute); font-size:12px; cursor:pointer; white-space:nowrap; }
+  output { min-width:38px; text-align:right; color:var(--mute); font-variant-numeric:tabular-nums; font-size:12px; }
+  input[type=range] { flex:1; accent-color:var(--a); min-width:0; }
+  input[type=range]:disabled { opacity:.35; }
+  input[type=color] { width:40px; height:24px; border:1px solid var(--line); background:none; padding:0; border-radius:4px; justify-self:end; }
+  input[type=checkbox] { width:16px; height:16px; accent-color:var(--a); }
+  .row > input[type=checkbox] { justify-self:end; }
+  select, input[type=text] { width:100%; background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:6px 8px; font:inherit; }
+  button { background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 12px; font:inherit; cursor:pointer; }
+  button:hover { border-color:var(--a); }
+  button.primary { background:linear-gradient(90deg,var(--a),#4b7bff); border-color:transparent; }
+  .seg { display:flex; justify-self:end; }
+  .seg button { border-radius:0; padding:5px 14px; }
+  .seg button:first-child { border-radius:6px 0 0 6px; } .seg button:last-child { border-radius:0 6px 6px 0; border-left:0; }
+  .seg button.on { background:var(--a); border-color:var(--a); }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; margin:4px 0 10px; }
+  .chips button { padding:5px 10px; }
+  .bar { display:flex; gap:8px; flex-wrap:wrap; margin:12px 0; }
+  .save { display:grid; grid-template-columns:1fr auto; gap:8px; margin:6px 0 10px; }
+  .tip { color:var(--mute); font-size:12px; margin:8px 0 0; }
+  .warn { color:#ffb86b; }
+  footer { text-align:center; color:rgba(255,255,255,.55); font-size:11px; padding:10px 0 18px; }
+  :focus-visible { outline:2px solid var(--b); outline-offset:2px; }
+</style>
+<header>
+  <div><h1>Desktop Audio Visualizer</h1><p data-i18n="app_sub"></p></div>
+  <a class="coffee" href="https://umarsandifajar.github.io/bio-sandiana/" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 8h1a3 3 0 0 1 0 6h-1"/><path d="M3 8h14v6a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5z"/><path d="M7 2v3M11 2v3M15 2v3"/></svg>
+    <span data-i18n="coffee"></span>
+  </a>
+</header>
+<main>
+  <section><div class="row"><span data-i18n="lang_label"></span><div class="seg"><button data-lang="en">English</button><button data-lang="id">Indonesia</button></div></div></section>
+  <div id="ui"></div>
+  <section>
+    <h2 data-i18n="sec_presets"></h2>
+    <div class="chips" id="presets"></div>
+    <div class="save"><input type="text" id="pname" data-i18n-ph="p_ph"><button id="psave" data-i18n="p_save"></button></div>
+    <div class="bar"><button id="pimport" data-i18n="p_import"></button><button id="pfolder" data-i18n="p_folder"></button></div>
+    <p class="tip" data-i18n="p_tip"></p>
+  </section>
+  <div class="bar"><button class="primary" id="edit"></button><button id="reset" data-i18n="b_reset"></button></div>
+  <p class="tip" data-i18n="tip_keys"></p>
+  <p class="tip warn" id="hkwarn" hidden></p>
+</main>
+<footer data-i18n="footer"></footer>
+<script src="../node_modules/butterchurn-presets/lib/butterchurnPresets.min.js"></script>
+<script src="i18n.js"></script>
+<script src="settings.js"></script>
