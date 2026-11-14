@@ -11,6 +11,8 @@
 
 <!-- Add a screenshot or GIF here, e.g.: ![Preview](docs/preview.gif) -->
 
+<img width="1672" height="941" alt="Desktop Audio Visualizer Promotional Banner" src="https://github.com/user-attachments/assets/5e150760-c9b1-4775-aef7-96568d404f42" />
+
 ## Download
 
 Grab the latest build from the **[Releases page](../../releases/latest)**:
