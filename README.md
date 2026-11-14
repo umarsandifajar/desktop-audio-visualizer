@@ -10,8 +10,7 @@
 🇮🇩 [Baca dalam Bahasa Indonesia](README.id.md)
 
 <!-- Add a screenshot or GIF here, e.g.: ![Preview](docs/preview.gif) -->
-
-<img width="1672" height="941" alt="Desktop Audio Visualizer Promotional Banner" src="https://github.com/user-attachments/assets/5e150760-c9b1-4775-aef7-96568d404f42" />
+<img width="1672" height="941" alt="Desktop Audio Visualizer Promo (1)" src="https://github.com/user-attachments/assets/cb178061-dcf8-4233-baa3-e4fc543f450b" />
 
 ## Download
 
